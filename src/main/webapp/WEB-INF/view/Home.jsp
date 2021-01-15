@@ -7,6 +7,7 @@
 		<link href="css/Common.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
+		<c:set var="pageSize" value="5"></c:set>
 		<div class="container-fluid">
 			<div>
 				<c:if test="${not empty successMsg}">
@@ -24,6 +25,9 @@
 				<div class="col-4"></div>
 			</div>
 			<div>
+				<div>
+					<h2>Total Records :: ${totalRecord}</h2>
+				</div>
 				<c:choose>
 					<c:when test="${not empty humanList}">
 						<table class="table">
@@ -37,8 +41,8 @@
 									<td>${human.name}</td>
 									<td>${human.cast}</td>
 									<td>
-										<a href="${pageContext.request.contextPath}/deletehuman/${human.humanId}" class="btn btn-primary">Delete</a>
 										<a href="${pageContext.request.contextPath}/updatehuman/${human.humanId}" class="btn btn-primary">Update</a>
+										<a href="${pageContext.request.contextPath}/deletehuman/${human.humanId}" class="btn btn-danger">Delete</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -49,6 +53,21 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+			<div id="paginateDiv"></div>
 		</div>
 	</body>
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		var totalPages = Math.ceil(${totalRecord}/${pageSize});
+		if(totalPages > 1){
+			$('#paginateDiv').append("<ul id='appendLine' class='pagination'>");
+			for(var i=1; i<=totalPages; i++){
+				$('#appendLine').append("<li><a class='page-link' href='#'>" + i + "</a></li>");
+			}
+			$('#paginateDiv').append("</ul>");
+		}
+	});
+	
+	</script>
 </html>
