@@ -68,4 +68,5 @@ public class HumanService {
 		Page<Human> allHumanEntity = humanRepo.findAll(pageable);
 		return allHumanEntity.hasContent() ? allHumanEntity.getContent() : null;
 	}
+	
 }

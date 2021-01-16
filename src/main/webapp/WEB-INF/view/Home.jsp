@@ -63,7 +63,11 @@
 		if(totalPages > 1){
 			$('#paginateDiv').append("<ul id='appendLine' class='pagination'>");
 			for(var i=1; i<=totalPages; i++){
-				$('#appendLine').append("<li><a class='page-link' href='#'>" + i + "</a></li>");
+				if(i == 1){
+					$('#appendLine').append("<li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li>");
+				} else {
+					$('#appendLine').append("<li><a class='page-link' href='${pageContext.request.contextPath}/5/" + i + "/humanId'" + ">" + i + "</a></li>");
+				}
 			}
 			$('#paginateDiv').append("</ul>");
 		}
