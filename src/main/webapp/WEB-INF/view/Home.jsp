@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="sForm" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sTag" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<%@include file="include/Head.jsp" %>
-		<title>Home</title>
+		<title><sTag:message code="label_title_home_page"/></title>
 		<link href="css/Common.css" rel="stylesheet" type="text/css">
+		<sTag:eval expression="@environment.getProperty('default.page.size')" var="pageSize"></sTag:eval>
 	</head>
 	<body>
-		<c:set var="pageSize" value="5"></c:set>
 		<div class="container-fluid">
 			<div>
 				<c:if test="${not empty successMsg}">
@@ -26,17 +28,17 @@
 			</div>
 			<div>
 				<div>
-					<h2>Total Records :: ${totalRecord}</h2>
+					<h2><sTag:message code="label_total_record"/> :: ${totalItems}</h2>
 				</div>
 				<c:choose>
-					<c:when test="${not empty humanList}">
+					<c:when test="${not empty listHuman}">
 						<table class="table">
 							<tr>
-								<th>Name</th>
-								<th>Cast</th>
-								<th>Action</th>
+								<th><sTag:message code="label_human_name"/></th>
+								<th><sTag:message code="label_human_cast"/></th>
+								<th><sTag:message code="label_action"/></th>
 							</tr>
-							<c:forEach items="${humanList}" var="human">
+							<c:forEach items="${listHuman}" var="human">
 								<tr>
 									<td>${human.name}</td>
 									<td>${human.cast}</td>
@@ -49,7 +51,7 @@
 						</table>
 					</c:when>
 					<c:otherwise>
-						<h3 class="col-md-4 offset-4 mt-4">No Record Found.</h3>
+						<h3 class="col-md-4 offset-4 mt-4"><sTag:message code="label_no_record_found"/></h3>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -59,7 +61,7 @@
 	<script type="text/javascript">
 	
 	$(document).ready(function(){
-		var totalPages = Math.ceil(${totalRecord}/${pageSize});
+		var totalPages = Math.ceil(${totalItems}/${pageSize});
 		if(totalPages > 1){
 			$('#paginateDiv').append("<ul id='appendLine' class='pagination'>");
 			for(var i=1; i<=totalPages; i++){
