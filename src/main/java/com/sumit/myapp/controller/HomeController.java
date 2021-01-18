@@ -48,7 +48,8 @@ public class HomeController {
 	
 	@GetMapping(value = {"/"})
 	public String getHomePage(Model model) {
-		return findPaginated(1, model);
+//		return findPaginated(1, model);
+		return findPaginatedWithSort(1,"humanId",model);
 	}
 	
 	@GetMapping(value = {"/showaddhuman"})
@@ -148,6 +149,22 @@ public class HomeController {
 			Model model) {
 		try {
 			Page<Human> page = humanService.getPaginateHumanData(pageNo, pageSize);
+			List<Human> listHuman = page.hasContent() ? page.getContent() : null;
+			model.addAttribute("currentPage", pageNo);
+			model.addAttribute("totalPages", page.getTotalPages());
+			model.addAttribute("totalItems", page.getTotalElements());
+			model.addAttribute("listHuman", listHuman);
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return "Home";
+	}
+	
+	@GetMapping(value = {"/page/{pageNo}/{sorted}"})
+	public String findPaginatedWithSort(@PathVariable(value = "pageNo") int pageNo,
+			@PathVariable(value = "sorted") String sorted, Model model) {
+		try {
+			Page<Human> page = humanService.getPaginateSortedHumanData(pageNo, pageSize, sorted);
 			List<Human> listHuman = page.hasContent() ? page.getContent() : null;
 			model.addAttribute("currentPage", pageNo);
 			model.addAttribute("totalPages", page.getTotalPages());

@@ -34,8 +34,8 @@
 					<c:when test="${not empty listHuman}">
 						<table class="table">
 							<tr>
-								<th><sTag:message code="label_human_name"/></th>
-								<th><sTag:message code="label_human_cast"/></th>
+								<th><a href="${pageContext.request.contextPath}/page/${currentPage}/name"><sTag:message code="label_human_name"/></a></th>
+								<th><a href="${pageContext.request.contextPath}/page/${currentPage}/cast"><sTag:message code="label_human_cast"/></a></th>
 								<th><sTag:message code="label_action"/></th>
 							</tr>
 							<c:forEach items="${listHuman}" var="human">
@@ -59,21 +59,19 @@
 		</div>
 	</body>
 	<script type="text/javascript">
-	
 	$(document).ready(function(){
 		var totalPages = Math.ceil(${totalItems}/${pageSize});
 		if(totalPages > 1){
 			$('#paginateDiv').append("<ul id='appendLine' class='pagination'>");
 			for(var i=1; i<=totalPages; i++){
-				if(i == 1){
+				if(i == ${currentPage}){
 					$('#appendLine').append("<li class='page-item active'><a class='page-link' href='#'>" + i + "</a></li>");
 				} else {
-					$('#appendLine').append("<li><a class='page-link' href='${pageContext.request.contextPath}/5/" + i + "/humanId'" + ">" + i + "</a></li>");
+					$('#appendLine').append("<li><a class='page-link' href='${pageContext.request.contextPath}/page/" + i + "'" + ">" + i + "</a></li>");
 				}
 			}
 			$('#paginateDiv').append("</ul>");
 		}
 	});
-	
 	</script>
 </html>

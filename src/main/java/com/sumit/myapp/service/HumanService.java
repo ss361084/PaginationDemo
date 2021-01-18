@@ -21,4 +21,6 @@ public interface HumanService {
 	public void deleteHuman(Human human);
 	
 	public Page<Human> getPaginateHumanData(int pageNo, int pageSize);
+	
+	public Page<Human> getPaginateSortedHumanData(int pageNo, int pageSize, String sorted);
 }
