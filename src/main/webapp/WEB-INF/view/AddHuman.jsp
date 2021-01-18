@@ -8,7 +8,7 @@
 		<link href="css/Common.css" rel="stylesheet" type="text/css">
 		<title>
 			<c:choose>
-				<c:when test="${opearion eq 'add'}">
+				<c:when test="${operation eq 'add'}">
 					<sTag:message code="label_title_add_human_page"/>
 				</c:when>
 				<c:otherwise>
@@ -32,20 +32,24 @@
 					<div class="form-group">
 						<sForm:hidden path="humanId"/>
 						<input type="hidden" id="operation" name="operation" value="${operation}">
-						<label>Enter Name :: </label>
+						<label><sTag:message code="label_add_human_enter_name"/> :: </label>
 						<sForm:input class="form-control" path="name"/>
 						<sForm:errors class="errClass" path="name"></sForm:errors>
 					</div>
 					<div class="form-group">
-						<label>Enter Cast :: </label>
+						<label><sTag:message code="label_add_human_enter_cast"/> :: </label>
 						<sForm:input class="form-control" path="cast"/>
 						<sForm:errors class="errClass" path="cast"></sForm:errors>
 					</div>
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary btn-block">
 							<c:choose>
-								<c:when test="${operation eq 'add'}">Submit</c:when>
-								<c:otherwise>Update</c:otherwise>
+								<c:when test="${operation eq 'add'}">
+									<sTag:message code="label_submit_btn"/>
+								</c:when>
+								<c:otherwise>
+									<sTag:message code="label_update_btn"/>
+								</c:otherwise>
 							</c:choose>
 						</button>
 					</div>
