@@ -34,8 +34,8 @@
 					<c:when test="${not empty listHuman}">
 						<table class="table">
 							<tr>
-								<th><a href="${pageContext.request.contextPath}/page/${currentPage}/name"><sTag:message code="label_human_name"/></a></th>
-								<th><a href="${pageContext.request.contextPath}/page/${currentPage}/cast"><sTag:message code="label_human_cast"/></a></th>
+								<th><sTag:message code="label_human_name"/></th>
+								<th><sTag:message code="label_human_cast"/></th>
 								<th><sTag:message code="label_action"/></th>
 							</tr>
 							<c:forEach items="${listHuman}" var="human">

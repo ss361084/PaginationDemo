@@ -78,7 +78,7 @@ public class HumanServiceImpl implements HumanService{
 
 	@Override
 	public Page<Human> getPaginateHumanData(int pageNo, int pageSize) {
-		Pageable pageable = PageRequest.of(pageNo-1, pageSize);
+		Pageable pageable = PageRequest.of(pageNo-1, pageSize,Sort.by(Direction.DESC,"humanId"));
 		return humanRepo.findAll(pageable);
 	}
 
